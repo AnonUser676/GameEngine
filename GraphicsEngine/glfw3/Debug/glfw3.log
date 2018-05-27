@@ -1,0 +1,59 @@
+﻿  xkb_unicode.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  x11_window.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  x11_monitor.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  x11_init.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  wl_window.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  wl_monitor.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  wl_init.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  window.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_window.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_tls.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_time.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_monitor.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_joystick.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  win32_init.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  wgl_context.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  vulkan.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  posix_tls.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  posix_time.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  monitor.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  mir_window.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  Generating Code...
+  Compiling...
+  mir_monitor.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  mir_init.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  linux_joystick.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  input.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  init.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  glx_context.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  egl_context.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  context.c
+e:\_aie\2017_melbourne_yr2\sem1\engine system\graphics engine ver0\graphicsengine\glfw3\src\internal.h(175): fatal error C1189: #error:  "No supported window creation API selected"
+  Generating Code...
