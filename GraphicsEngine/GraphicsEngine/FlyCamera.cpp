@@ -4,7 +4,7 @@
 
 FlyCamera::FlyCamera()
 {
-	speed = 0;
+	speed = 30;
 	up = vec3(0);
 	m_mouseX = 0;
 	m_mouseY = 0;
@@ -37,6 +37,23 @@ void FlyCamera::update(float deltaTime, GLFWwindow* a_glfwWindow)
 	worldTransform = glm::inverse(viewTransform);
 
 	//keyboard stuff
+
+	if (glfwGetKey(a_glfwWindow, GLFW_KEY_LEFT) == GLFW_PRESS)
+	{
+		worldTransform[3] += worldTransform[0] * deltaTime * -speed;
+	}
+	if (glfwGetKey(a_glfwWindow, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		worldTransform[3] += worldTransform[2] * deltaTime * -speed;
+	}
+	if (glfwGetKey(a_glfwWindow, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	{
+		worldTransform[3] += worldTransform[0] * deltaTime * speed;
+	}
+	if (glfwGetKey(a_glfwWindow, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		worldTransform[3] += worldTransform[2] * deltaTime * speed;
+	}
 
 	viewTransform = glm::inverse(worldTransform);
 	updateProjectionViewTransform();

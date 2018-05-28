@@ -34,10 +34,10 @@ namespace VirtualStage {
 				DeltaTime = currTime - prevTime;
 				prevTime = currTime;
 
-				std::cout << currTime << std::endl;
-				std::cout << DeltaTime << std::endl;
-				std::cout << deltaTime << std::endl;
-				std::cout << prevTime << std::endl;
+				//std::cout << currTime << std::endl;
+				//std::cout << DeltaTime << std::endl;
+				//std::cout << deltaTime << std::endl;
+				//std::cout << prevTime << std::endl;
 
 				glfwPollEvents(); //poll events
 
