@@ -40,20 +40,20 @@ bool ApplicationEngine::startUp()
 		return false;
 	}
 
-	if (m_bunnyMesh.load("./stanford/bunny.obj") == false)
-	{
-		printf("Bunny Mesh Error! \n");
-		system("pause");
-		return false;
-	}
-
-	m_bunnyTransform =
-	{
-		5.f,0,0,0,
-		0,5.f,0,0,
-		0,0,5.f,0,
-		0,0,0,1
-	};
+	//if (m_bunnyMesh.load("./stanford/bunny.obj") == false)
+	//{
+	//	printf("Bunny Mesh Error! \n");
+	//	system("pause");
+	//	return false;
+	//}
+	//
+	//m_bunnyTransform =
+	//{
+	//	5.f,0,0,0,
+	//	0,5.f,0,0,
+	//	0,0,5.f,0,
+	//	0,0,0,1
+	//};
 
 	m_quadMesh.initialiseQuad();
 
@@ -75,8 +75,8 @@ bool ApplicationEngine::startUp()
 		0, 0, 0, 1
 	};
 
-	m_quadCube.addAABB(vec3(3, 2, 1), vec3(1, 1, 1));
-	m_quadPyramid.addPyramid(vec3(4, 4, 4), vec3(1, 1, 1));
+	//m_quadCube.addAABB(vec3(3, 2, 1), vec3(1, 1, 1));
+	//m_quadPyramid.addPyramid(vec3(4, 4, 4), vec3(1, 1, 1));
 	return true;
 }
 
