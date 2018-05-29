@@ -32,7 +32,7 @@ void FlyCamera::update(float deltaTime, GLFWwindow* a_glfwWindow)
 	mat4 rotMat(1);
 	rotMat = glm::rotate((float)-m_deltaMouseX * deltaTime, vec3(up[0], up[1], up[2]));
 	viewTransform = rotMat * viewTransform;
-	rotMat = rotate((float)-m_deltaMouseY * deltaTime, vec3(100));
+	rotMat = rotate((float)-m_deltaMouseY * deltaTime, vec3(1,0,0));
 	viewTransform = rotMat * viewTransform;
 	worldTransform = glm::inverse(viewTransform);
 

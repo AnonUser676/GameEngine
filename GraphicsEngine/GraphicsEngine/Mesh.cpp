@@ -10,7 +10,7 @@ Mesh::~Mesh()
 
 void Mesh::initialiseQuad()
 {
-	//check thatt the mesh is not initialized already
+	//check that the mesh is not initialized already
 	assert(vao == 0);
 
 	//generate buffers
@@ -24,21 +24,33 @@ void Mesh::initialiseQuad()
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	//define 6 vertices for 2 triangles
-	/*Vertex vertices[6];
+	Vertex vertices[6];
 	vertices[0].position = { -0.5f, 0, 0.5f, 1 };
 	vertices[1].position = {  0.5f, 0, 0.5f, 1 };
 	vertices[2].position = { -0.5f, 0,-0.5f, 1 };
 
 	vertices[3].position = { -0.5f, 0,-0.5f, 1 };
 	vertices[4].position = {  0.5f, 0, 0.5f, 1 };
-	vertices[5].position = {  0.5f, 0,-0.5f, 1 };*/
+	vertices[5].position = {  0.5f, 0,-0.5f, 1 };
 
 	//fill vertex buffer
-	//glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(Vertex), vertices, GL_STATIC_DRAW);
 
 	//enable first element as position
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+
+	vertices[0].texCoord = { 0,1 }; //bottom left
+	vertices[1].texCoord = { 1,1 }; //bottom right
+	vertices[2].texCoord = { 0,0 }; //top left
+
+	vertices[3].texCoord = { 0,0 }; //top left
+	vertices[4].texCoord = { 1,1 }; //bottom right
+	vertices[5].texCoord = { 1,0 }; //top right
+
+	//enable third element as texture
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
 
 	//unbind buffers
 	glBindVertexArray(0);
@@ -69,6 +81,10 @@ void Mesh::initialise(unsigned int vertexCount, const Vertex* vertices, unsigned
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
 
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
+
+
 	//bind indices if there are any
 	if (indexCount != 0)
 	{
@@ -93,6 +109,86 @@ void Mesh::initialise(unsigned int vertexCount, const Vertex* vertices, unsigned
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void Mesh::addAABB(const glm::vec3& center, const glm::vec3& extents, const glm::mat4* transform)
+{
+	Vertex vVerts[8];
+	glm::vec3 c = center;
+	glm::vec3 vX(extents.x, 0, 0);
+	glm::vec3 vY(0, extents.y, 0);
+	glm::vec3 vZ(0, 0, extents.z);
+	float extentsX = extents.x;
+	float extentsY = extents.y;
+	float extentsZ = extents.x;
+
+	if (transform != nullptr) {
+		vX = glm::vec3((*transform * glm::vec4(vX, 0)));
+		vY = glm::vec3((*transform * glm::vec4(vY, 0)));
+		vZ = glm::vec3((*transform * glm::vec4(vZ, 0)));
+		c = glm::vec3((*transform)[3]) + c;
+	}
+
+	//top vertex
+	vVerts[0].position = { c.x - extentsX, c.y - extentsY, c.z - extentsZ, 1};
+	vVerts[1].position = { c.x - extentsX, c.y + extentsY, c.z - extentsZ, 1 };
+	vVerts[2].position = { c.x + extentsX, c.y + extentsY, c.z - extentsZ, 1 };
+	vVerts[3].position = { c.x + extentsX, c.y - extentsY, c.z - extentsZ, 1 };
+			 
+	// bottom vertex
+	vVerts[4].position = { c.x - extentsX, c.y - extentsY, c.z + extentsZ, 1 };
+	vVerts[5].position = { c.x - extentsX, c.y + extentsY, c.z + extentsZ, 1 };
+	vVerts[6].position = { c.x + extentsX, c.y + extentsY, c.z + extentsZ, 1 };
+	vVerts[7].position = { c.x + extentsX, c.y - extentsY, c.z + extentsZ, 1 };
+
+	unsigned int indices[36] =
+	{   /*front*/ 0,1,2,2,3,0,
+		/*left*/  0,4,5,5,1,0,
+		/*back*/  4,7,6,6,5,4,
+		/*right*/ 6,7,3,3,2,6,
+		/*top*/   1,5,6,6,2,1,
+		/*bottom*/0,3,7,7,4,0
+	};
+
+	initialise(8, vVerts, 36, indices);
+}
+
+void Mesh::addPyramid(const glm::vec3& center, const glm::vec3& extents, const glm::mat4* transform)
+{
+	Vertex vVerts[5];
+	glm::vec3 c = center;
+	glm::vec3 vX(extents.x, 0, 0);
+	glm::vec3 vY(0, extents.y, 0);
+	glm::vec3 vZ(0, 0, extents.z);
+	float extentsX = extents.x;
+	float extentsY = extents.y;
+	float extentsZ = extents.x;
+
+	if (transform != nullptr) {
+		vX = glm::vec3((*transform * glm::vec4(vX, 0)));
+		vY = glm::vec3((*transform * glm::vec4(vY, 0)));
+		vZ = glm::vec3((*transform * glm::vec4(vZ, 0)));
+		c = glm::vec3((*transform)[3]) + c;
+	}
+
+	//top vertex
+	vVerts[0].position = { c.x, c.y + extentsY, c.z, 1 };
+	
+	// bottom vertex
+	vVerts[1].position = { c.x - extentsX, c.y - extentsY, c.z - extentsZ, 1 };
+	vVerts[2].position = { c.x - extentsX, c.y - extentsY, c.z + extentsZ, 1 };
+	vVerts[3].position = { c.x + extentsX, c.y - extentsY, c.z + extentsZ, 1 };
+	vVerts[4].position = { c.x + extentsX, c.y - extentsY, c.z - extentsZ, 1 };
+	
+	unsigned int indices[18] =
+	{   /*front*/ 1,0,4,
+		/*left*/  2,0,1,
+		/*back*/  3,0,2,
+		/*right*/ 4,0,3,
+		/*bottom*/1,4,3,3,2,1
+	};
+
+	initialise(8, vVerts, 18, indices);
+}
+
 void Mesh::draw()
 {
 	glBindVertexArray(vao);
@@ -102,5 +198,4 @@ void Mesh::draw()
 		glDrawElements(GL_TRIANGLES, 3 * triCount, GL_UNSIGNED_INT, 0);
 	else
 		glDrawArrays(GL_TRIANGLES, 0, 3 * triCount);
-
 }

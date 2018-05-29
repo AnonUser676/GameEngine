@@ -23,14 +23,37 @@ bool ApplicationEngine::startUp()
 	//create simple camera transforms
 	
 	m_shader.loadShader(aie::eShaderStage::VERTEX, "./simple.vert");
-
+	
 	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "./simple.frag");
-
+	
 	if (m_shader.link() == false)
 	{
 		printf("Shader Error: %s\n", m_shader.getLastError());
+		system("pause");
 		return false;
 	}
+
+	if (m_gridTexture.load("./textures/numbered_grid.tga") == false)
+	{
+		printf("Failed to load texture! \n");
+		system("pause");
+		return false;
+	}
+
+	if (m_bunnyMesh.load("./stanford/bunny.obj") == false)
+	{
+		printf("Bunny Mesh Error! \n");
+		system("pause");
+		return false;
+	}
+
+	m_bunnyTransform =
+	{
+		5.f,0,0,0,
+		0,5.f,0,0,
+		0,0,5.f,0,
+		0,0,0,1
+	};
 
 	m_quadMesh.initialiseQuad();
 
@@ -41,8 +64,8 @@ bool ApplicationEngine::startUp()
 	vertices[2].position = { -0.5f, 0, -0.5f, 1 };
 	vertices[3].position = { 0.5f, 0, -0.5f, 1 };
 	unsigned int indices[6] = { 0, 1, 2, 2, 1, 3 };
-	m_quadMeshTriangle.initialise(4, vertices, 6, indices);
-
+	m_quadMeshTriangle.initialise(4, vertices, 6, indices);
+	
 	//make the quad 10 units wide
 	m_quadTransform =
 	{
@@ -52,6 +75,8 @@ bool ApplicationEngine::startUp()
 		0, 0, 0, 1
 	};
 
+	m_quadCube.addAABB(vec3(3, 2, 1), vec3(1, 1, 1));
+	m_quadPyramid.addPyramid(vec3(4, 4, 4), vec3(1, 1, 1));
 	return true;
 }
 
@@ -78,7 +103,7 @@ void ApplicationEngine::draw()
 
 	//update perspective in case window resizes
 	//m_projectionMatrix = glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.f);
-		
+
 	if (true) 
 	{
 		//aie::Gizmos::clear();
@@ -98,14 +123,28 @@ void ApplicationEngine::draw()
 		
 		//bind shader
 		m_shader.bind();
-
+		
 		//bind transform
 		auto pvm = m_FlyCamera->getProjection() * m_FlyCamera->getView() * m_quadTransform;
 		m_shader.bindUniform("ProjectionViewModel", pvm);
 
+		//bind texture location
+		m_shader.bindUniform("diffuseTexture", 0);
+
+		//bind texture to specified location
+		m_gridTexture.bind(0);
+
+		//draw quad
+		m_quadMesh.draw();
+		
 		//draw quad
 		//m_quadMesh.draw();
-		m_quadMeshTriangle.draw();
+		//m_bunnyMesh.draw();
+
+		//m_quadMeshTriangle.draw();
+
+		//m_quadCube.draw();
+		//m_quadPyramid.draw();
 		
 		//Iniitiate draw with camera set-up by projection and view values
 		aie::Gizmos::draw(m_FlyCamera->getProjection() * m_FlyCamera->getView());
