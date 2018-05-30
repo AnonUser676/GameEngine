@@ -1,3 +1,4 @@
-﻿  ApplicationEngine.cpp
-c:\users\s172117\desktop\gameengine\gameengine\graphicsengine\graphicsengine\applicationengine.cpp(108): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Texture.cpp
+  OBJMesh.cpp
+  Generating Code...
   GraphicsEngine.vcxproj -> C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\GraphicsEngine.exe
