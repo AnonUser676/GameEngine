@@ -55,16 +55,31 @@ bool ApplicationEngine::startUp()
 	//	0,0,0,1
 	//};
 
+	if (m_spearMesh.load("./soulspear/soulspear.obj") == false)
+	{
+		printf("Spear Mesh Error! \n");
+		system("pause");
+		return false;
+	}
+
+	m_spearTransform =
+	{
+		1,0,0,0,
+		0,1,0,0,
+		0,0,1,0,
+		0,0,0,1
+	};
+
 	m_quadMesh.initialiseQuad();
 
 	// define 4 vertices for 2 triangles
-	Mesh::Vertex vertices[4];
-	vertices[0].position = { -0.5f, 0, 0.5f, 1 };
-	vertices[1].position = { 0.5f, 0, 0.5f, 1 };
-	vertices[2].position = { -0.5f, 0, -0.5f, 1 };
-	vertices[3].position = { 0.5f, 0, -0.5f, 1 };
-	unsigned int indices[6] = { 0, 1, 2, 2, 1, 3 };
-	m_quadMeshTriangle.initialise(4, vertices, 6, indices);
+	//Mesh::Vertex vertices[4];
+	//vertices[0].position = { -0.5f, 0, 0.5f, 1 };
+	//vertices[1].position = { 0.5f, 0, 0.5f, 1 };
+	//vertices[2].position = { -0.5f, 0, -0.5f, 1 };
+	//vertices[3].position = { 0.5f, 0, -0.5f, 1 };
+	//unsigned int indices[6] = { 0, 1, 2, 2, 1, 3 };
+	//m_quadMeshTriangle.initialise(4, vertices, 6, indices);
 	
 	//make the quad 10 units wide
 	m_quadTransform =
@@ -74,7 +89,7 @@ bool ApplicationEngine::startUp()
 		0, 0, 10, 0,
 		0, 0, 0, 1
 	};
-
+	
 	//m_quadCube.addAABB(vec3(3, 2, 1), vec3(1, 1, 1));
 	//m_quadPyramid.addPyramid(vec3(4, 4, 4), vec3(1, 1, 1));
 	return true;
@@ -89,10 +104,16 @@ void ApplicationEngine::update(float deltaTime)
 {
 	m_timer += deltaTime;
 
+	//query time since application started
+	float time = glfwGetTime();
+
 	m_FlyCamera->update(deltaTime, window);
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		quit();
+
+	//rotate light
+	m_light.direction = glm::normalize(vec3(glm::cos(time * 2), glm::sin(time * 2), 0));
 }
 
 void ApplicationEngine::draw()
@@ -106,7 +127,7 @@ void ApplicationEngine::draw()
 
 	if (true) 
 	{
-		//aie::Gizmos::clear();
+		aie::Gizmos::clear();
 		//adds 3-axis line 
 		aie::Gizmos::addTransform(glm::mat4(1));
 
@@ -124,9 +145,14 @@ void ApplicationEngine::draw()
 		//bind shader
 		m_shader.bind();
 		
+		//bind light
+		m_shader.bindUniform("LightDirection", m_light.direction);
+
 		//bind transform
-		auto pvm = m_FlyCamera->getProjection() * m_FlyCamera->getView() * m_quadTransform;
+		auto pvm = m_FlyCamera->getProjection() * m_FlyCamera->getView() /* m_quadTransform*/;
 		m_shader.bindUniform("ProjectionViewModel", pvm);
+
+		m_shader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
 
 		//bind texture location
 		m_shader.bindUniform("diffuseTexture", 0);
@@ -137,7 +163,10 @@ void ApplicationEngine::draw()
 		//draw quad
 		m_quadMesh.draw();
 		
-		//draw quad
+		//draw spear
+		m_spearMesh.draw();
+
+		//draw quadmesh and bunny
 		//m_quadMesh.draw();
 		//m_bunnyMesh.draw();
 

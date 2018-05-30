@@ -12,6 +12,7 @@ FlyCamera::FlyCamera()
 	m_deltaMouseX = 0;
 	m_deltaMouseY = 0;
 	worldTransform = mat4(1);
+	rotMat = mat4(0);
 }
 
 
@@ -28,9 +29,9 @@ void FlyCamera::update(float deltaTime, GLFWwindow* a_glfwWindow)
 
 	glfwSetCursorPos(a_glfwWindow, 640, 360);
 
-	vec4 up = glm::inverse(m_worldTransform) * vec4(0, 1, 0, 0);
-	mat4 rotMat(1);
-	rotMat = glm::rotate((float)-m_deltaMouseX * deltaTime, vec3(up[0], up[1], up[2]));
+	upp = glm::inverse(m_worldTransform) * vec4(0, 1, 0, 0);
+	
+	rotMat = glm::rotate((float)-m_deltaMouseX * deltaTime, vec3(upp[0], upp[1], upp[2]));
 	viewTransform = rotMat * viewTransform;
 	rotMat = rotate((float)-m_deltaMouseY * deltaTime, vec3(1,0,0));
 	viewTransform = rotMat * viewTransform;

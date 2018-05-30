@@ -2,11 +2,26 @@
 
 in vec2 vTexCoord;
 
+in vec3 vNormal;
+
+uniform vec3 LightDirection;
+
 uniform sampler2D diffuseTexture;
 
 out vec4 FragColour;
+out vec4 GreyScale;
 
 void main()
 {
-FragColour = texture(diffuseTexture, vTexCoord);
+//ensure normal and light direction are normalised
+vec3 N = normalize(vNormal);
+vec3 L = normalize(LightDirection);
+
+//calculate lambert term (negate light direction)
+float lambertTerm = max( 0, min( 1, dot(N, -L)));
+
+//output lambert as grayscale
+GreyScale = vec4(lambertTerm, lambertTerm, lambertTerm, 1);
+FragColour = vec4(lambertTerm, lambertTerm, lambertTerm, 1);
+//FragColour = texture(diffuseTexture, vTexCoord);
 }

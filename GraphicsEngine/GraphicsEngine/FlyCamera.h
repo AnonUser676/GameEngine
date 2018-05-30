@@ -22,5 +22,7 @@ protected:
 	double m_deltaMouseX;
 	double m_deltaMouseY;
 	mat4 m_worldTransform;
+	mat4 rotMat;
+	vec4 upp;
 };
 
