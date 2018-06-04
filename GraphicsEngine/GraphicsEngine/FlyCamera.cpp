@@ -12,7 +12,7 @@ FlyCamera::FlyCamera()
 	m_deltaMouseX = 0;
 	m_deltaMouseY = 0;
 	worldTransform = mat4(1);
-	rotMat = mat4(0);
+	rotMat = rotate(0.f, vec3(1, 0, 0));
 }
 
 

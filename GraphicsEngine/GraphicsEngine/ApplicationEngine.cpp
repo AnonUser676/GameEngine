@@ -90,6 +90,12 @@ bool ApplicationEngine::startUp()
 		0, 0, 0, 1
 	};
 	
+	m_light.diffuse = { 1,1,1 };
+	m_light.specular = { 0,.25f,.5f };
+	m_ambientLight = { 0.99f,0.99f, 0.99f };
+
+	m_positions[0] = glm::vec3(10, 5, 10);
+
 	//m_quadCube.addAABB(vec3(3, 2, 1), vec3(1, 1, 1));
 	//m_quadPyramid.addPyramid(vec3(4, 4, 4), vec3(1, 1, 1));
 	return true;
@@ -146,6 +152,10 @@ void ApplicationEngine::draw()
 		m_shader.bind();
 		
 		//bind light
+		m_shader.bindUniform("cameraPosition", m_FlyCamera->getPosition());
+		m_shader.bindUniform("Ia", m_ambientLight);
+		m_shader.bindUniform("Id", m_light.diffuse);
+		m_shader.bindUniform("Is", m_light.specular);
 		m_shader.bindUniform("LightDirection", m_light.direction);
 
 		//bind transform

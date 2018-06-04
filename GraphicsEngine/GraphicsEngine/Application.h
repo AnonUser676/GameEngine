@@ -6,6 +6,8 @@
 #include <glfw3.h>
 #include "Gizmos.h"
 #include <chrono>
+#include <gtc/quaternion.hpp>
+#include <gtx/quaternion.hpp>
 
 using glm::mat4;
 using glm::vec3;
@@ -58,6 +60,9 @@ namespace VirtualStage {
 
 		bool engineRunning;
 		unsigned int fps;
+
+		glm::vec3 m_positions[2];
+		glm::quat m_rotations[2];
 
 		my::clock m_clock;
 		my::time m_startTime;

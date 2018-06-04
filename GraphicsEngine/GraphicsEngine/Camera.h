@@ -17,6 +17,7 @@ public:
 	void setLookAt(const vec3 &from, const vec3 &to, const vec3 &up);
 	void setPos(const vec3 &position);
 	mat4 getWorldTransform() const;
+	vec3 getPosition() const;
 	mat4 getView() const;
 	mat4 getProjection() const;
 	mat4 getProjectionView() const;

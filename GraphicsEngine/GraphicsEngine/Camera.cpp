@@ -49,6 +49,11 @@ mat4 Camera::getWorldTransform() const
 	return worldTransform;
 }
 
+vec3 Camera::getPosition() const
+{
+	return vec3(worldTransform[3][0], worldTransform[3][1], worldTransform[3][2] );
+}
+
 mat4 Camera::getView() const
 {
 	return viewTransform;
