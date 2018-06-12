@@ -33,27 +33,20 @@ bool ApplicationEngine::startUp()
 		return false;
 	}
 
-	if (m_gridTexture.load("./textures/numbered_grid.tga") == false)
+	if (m_bunnyMesh.load("./stanford/bunny.obj", true, true) == false)
 	{
-		printf("Failed to load texture! \n");
+		printf("Bunny Mesh Error! \n");
 		system("pause");
 		return false;
 	}
-
-	//if (m_bunnyMesh.load("./stanford/bunny.obj") == false)
-	//{
-	//	printf("Bunny Mesh Error! \n");
-	//	system("pause");
-	//	return false;
-	//}
-	//
-	//m_bunnyTransform =
-	//{
-	//	5.f,0,0,0,
-	//	0,5.f,0,0,
-	//	0,0,5.f,0,
-	//	0,0,0,1
-	//};
+		
+	m_bunnyTransform =
+	{
+		90.f,0,0,0,
+		0,20.f,0,0,
+		0,0,90.f,0,
+		0,0,0,1
+	};
 
 	if (m_spearMesh.load("./soulspear/soulspear.obj") == false)
 	{
@@ -96,8 +89,15 @@ bool ApplicationEngine::startUp()
 
 	m_positions[0] = glm::vec3(10, 5, 10);
 
+	if (m_gridTexture.load("./textures/numbered_grid.tga") == false)
+	{
+		printf("Failed to load texture! \n");
+		system("pause");
+		return false;
+	}
+
 	//m_quadCube.addAABB(vec3(3, 2, 1), vec3(1, 1, 1));
-	//m_quadPyramid.addPyramid(vec3(4, 4, 4), vec3(1, 1, 1));
+	m_quadPyramid.addPyramid(vec3(4, 4, 4), vec3(1, 1, 1));
 	return true;
 }
 
@@ -183,7 +183,7 @@ void ApplicationEngine::draw()
 		//m_quadMeshTriangle.draw();
 
 		//m_quadCube.draw();
-		//m_quadPyramid.draw();
+		m_quadPyramid.draw();
 		
 		//Iniitiate draw with camera set-up by projection and view values
 		aie::Gizmos::draw(m_FlyCamera->getProjection() * m_FlyCamera->getView());

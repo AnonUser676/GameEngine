@@ -126,7 +126,7 @@ namespace VirtualStage {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		//create Gizmo
-		aie::Gizmos::create(10000, 10000, 10000, 10000);
+		//aie::Gizmos::create(10000, 10000, 10000, 10000);
 
 		////sets up camera
 		////create view size for camera window
