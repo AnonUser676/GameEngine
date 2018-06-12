@@ -162,7 +162,7 @@ void ApplicationEngine::draw()
 		auto pvm = m_FlyCamera->getProjection() * m_FlyCamera->getView() /* m_quadTransform*/;
 		m_shader.bindUniform("ProjectionViewModel", pvm);
 
-		m_shader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_quadTransform)));
+		m_shader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_spearTransform)));
 
 		//bind texture location
 		m_shader.bindUniform("diffuseTexture", 0);
@@ -186,13 +186,13 @@ void ApplicationEngine::draw()
 		m_quadPyramid.draw();
 		
 		//Iniitiate draw with camera set-up by projection and view values
-		aie::Gizmos::draw(m_FlyCamera->getProjection() * m_FlyCamera->getView());
+		//aie::Gizmos::draw(m_FlyCamera->getProjection() * m_FlyCamera->getView());
 		
 		//draw 3d Gizmos
-		//aie::Gizmos::draw(m_FlyCamera->getProjectionView());
+		aie::Gizmos::draw(m_FlyCamera->getProjectionView());
 
 		//draw2d Gizmos
-		aie::Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
+		//aie::Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());
 
 	}
 	

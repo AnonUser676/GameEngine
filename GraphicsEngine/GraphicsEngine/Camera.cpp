@@ -36,6 +36,7 @@ void Camera::setPerspective(const float &fieldOfView, const float &aspectRatio, 
 void Camera::setLookAt(const vec3 &from, const vec3 &to, const vec3 &up)
 {
 	viewTransform = glm::lookAt(from, to, up);
+	updateProjectionViewTransform();
 }
 
 void Camera::setPos(const vec3 &position)

@@ -14,7 +14,7 @@ FlyCamera::FlyCamera()
 	worldTransform = mat4(1);
 	rotMat = rotate(50.f, vec3(1, 1, 1));
 	
-	setPos(vec3(30, 20, 30));
+	setPos(vec3(10, 20, 10));
 	setLookAt(vec3(worldTransform[3]),vec3(0), vec3(0, 1, 0));
 	setPerspective(glm::pi<float>() * 0.25f, 16.f / 9.f, 0.1f, 1000.f);
 }
