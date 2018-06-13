@@ -13,18 +13,16 @@ ApplicationEngine::~ApplicationEngine()
 
 bool ApplicationEngine::startUp()
 {
-	m_FlyCamera = new FlyCamera();
+	m_FlyCamera = new FlyCamera(window);
 
 	setBackGroundColor(0.25f, 0.25f, 0.25f);
 
 	//initialize gizmo primitive counts
 	aie::Gizmos::create(10000, 10000, 10000, 10000);
-
-	//create simple camera transforms
 	
-	m_shader.loadShader(aie::eShaderStage::VERTEX, "./simple.vert");
+	m_shader.loadShader(aie::eShaderStage::VERTEX, "./texturedPhong.vert");
 	
-	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "./simple.frag");
+	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "./texturedPhong.frag");
 	
 	if (m_shader.link() == false)
 	{
@@ -33,14 +31,17 @@ bool ApplicationEngine::startUp()
 		return false;
 	}
 
-	if (m_bunnyMesh.load("./stanford/bunny.obj", true, true) == false)
+	obj = new aie::OBJMesh[5];
+	m_objTransform = new glm::mat4[5];
+
+	if (obj[0].load("./stanford/bunny.obj", true, true) == false)
 	{
 		printf("Bunny Mesh Error! \n");
 		system("pause");
 		return false;
 	}
 		
-	m_bunnyTransform =
+	m_objTransform[0] =
 	{
 		90.f,0,0,0,
 		0,20.f,0,0,
@@ -48,18 +49,63 @@ bool ApplicationEngine::startUp()
 		0,0,0,1
 	};
 
-	if (m_spearMesh.load("./soulspear/soulspear.obj") == false)
+	if (obj[1].load("./soulspear/soulspear.obj") == false)
 	{
 		printf("Spear Mesh Error! \n");
 		system("pause");
 		return false;
 	}
 
-	m_spearTransform =
+	m_objTransform[1] =
 	{
 		1,0,0,0,
 		0,1,0,0,
 		0,0,1,0,
+		0,0,0,1
+	};
+
+	if (obj[2].load("./stanford/buddha.obj", true, true) == false)
+	{
+		printf("Buddha Mesh Error! \n");
+		system("pause");
+		return false;
+	}
+
+	m_objTransform[2] =
+	{
+		90.f,0,0,0,
+		0,20.f,0,0,
+		0,0,90.f,0,
+		0,0,0,1
+	};
+
+	if (obj[3].load("./stanford/dragon.obj", true, true) == false)
+	{
+		printf("Dragon Mesh Error! \n");
+		system("pause");
+		return false;
+	}
+
+	m_objTransform[3] =
+	{
+		90.f,0,0,0,
+		0,20.f,0,0,
+		0,0,90.f,0,
+		0,0,0,1
+	};
+
+	if (obj[4].load("./stanford/Lucy.obj", true, true) == false)
+	{
+		printf("Lucy Mesh Error! \n");
+		system("pause");
+		return false;
+	}
+
+	m_objTransform[4] =
+	{
+		90.f,0,0,0,
+		0,20.f,0,0,
+		0,0,90.f,0,
 		0,0,0,1
 	};
 
@@ -84,8 +130,9 @@ bool ApplicationEngine::startUp()
 	};
 	
 	m_light.diffuse = { 1,1,1 };
-	m_light.specular = { 0,.25f,.5f };
+	m_light.specular = { 0,.5f,.5f };
 	m_ambientLight = { 0.99f,0.99f, 0.99f };
+	m_light.power = 1.f;
 
 	m_positions[0] = glm::vec3(10, 5, 10);
 
@@ -119,7 +166,7 @@ void ApplicationEngine::update(float deltaTime)
 		quit();
 
 	//rotate light
-	m_light.direction = glm::normalize(vec3(glm::cos(time * 2), glm::sin(time * 2), 0));
+	m_light.direction = glm::normalize(vec3(glm::cos(time * 2.f), glm::sin(time * 2.f), 0));
 }
 
 void ApplicationEngine::draw()
@@ -156,13 +203,18 @@ void ApplicationEngine::draw()
 		m_shader.bindUniform("Ia", m_ambientLight);
 		m_shader.bindUniform("Id", m_light.diffuse);
 		m_shader.bindUniform("Is", m_light.specular);
+		m_shader.bindUniform("specularPower", m_light.power);
 		m_shader.bindUniform("LightDirection", m_light.direction);
 
-		//bind transform
-		auto pvm = m_FlyCamera->getProjection() * m_FlyCamera->getView() /* m_quadTransform*/;
-		m_shader.bindUniform("ProjectionViewModel", pvm);
+		for (int i = 0; i < 5; i++)
+		{
+			//bind transform
+			auto pvm = m_FlyCamera->getProjection() * m_FlyCamera->getView() * m_objTransform[i];
+			m_shader.bindUniform("ProjectionViewModel", pvm);
 
-		m_shader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_spearTransform)));
+			m_shader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_objTransform[i])));
+		}
+		
 
 		//bind texture location
 		m_shader.bindUniform("diffuseTexture", 0);
@@ -173,8 +225,12 @@ void ApplicationEngine::draw()
 		//draw quad
 		m_quadMesh.draw();
 		
-		//draw spear
-		m_spearMesh.draw();
+		//draw objects
+		for (int i = 0; i < 5; i++)
+		{
+			obj[i].draw();
+		}
+		
 
 		//draw quadmesh and bunny
 		//m_quadMesh.draw();

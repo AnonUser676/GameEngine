@@ -48,6 +48,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RenderTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Dependencies\glCore\gl_core_4_5.h">
@@ -86,12 +89,15 @@
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RenderTarget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="simple.vert">
+    <None Include="texturedPhong.frag">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="simple.frag">
+    <None Include="texturedPhong.vert">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

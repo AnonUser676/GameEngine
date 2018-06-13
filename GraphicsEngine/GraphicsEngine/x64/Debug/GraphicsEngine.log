@@ -1,3 +1,10 @@
 ﻿  ApplicationEngine.cpp
-c:\users\s172117\desktop\gameengine\gameengine\graphicsengine\graphicsengine\applicationengine.cpp(114): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\s172117\desktop\gameengine\gameengine\graphicsengine\graphicsengine\applicationengine.cpp(161): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Texture.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'Texture.obj' or at 'C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\vc141.pdb'; linking object as if no debug info
+Shader.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'Shader.obj' or at 'C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\vc141.pdb'; linking object as if no debug info
+OBJMesh.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'OBJMesh.obj' or at 'C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\vc141.pdb'; linking object as if no debug info
+Gizmos.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'Gizmos.obj' or at 'C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\vc141.pdb'; linking object as if no debug info
+Camera.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'Camera.obj' or at 'C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\vc141.pdb'; linking object as if no debug info
+Application.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'Application.obj' or at 'C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\vc141.pdb'; linking object as if no debug info
+gl_core_4_5.obj : warning LNK4099: PDB 'vc141.pdb' was not found with 'gl_core_4_5.obj' or at 'C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\vc141.pdb'; linking object as if no debug info
   GraphicsEngine.vcxproj -> C:\Users\s172117\Desktop\GameEngine\GameEngine\GraphicsEngine\x64\Debug\GraphicsEngine.exe

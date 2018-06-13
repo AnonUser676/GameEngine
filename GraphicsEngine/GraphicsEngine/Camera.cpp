@@ -12,7 +12,7 @@ Camera::Camera()
 	projectionViewTransform = mat4(0);
 	
 	//create view size for camera window
-	setLookAt(vec3(10, 10, 10), vec3(0), vec3(0, 1, 0));
+	setLookAt(vec3(worldTransform[3]), vec3(0), vec3(0, 1, 0));
 	//create projection window
 	setPerspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 }

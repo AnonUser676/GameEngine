@@ -7,7 +7,7 @@
 class FlyCamera : public Camera
 {
 public:
-	FlyCamera();
+	FlyCamera(GLFWwindow* a_glfwWindow);
 	~FlyCamera();
 
 	void update(float deltaTime, GLFWwindow* a_glfwWindow);

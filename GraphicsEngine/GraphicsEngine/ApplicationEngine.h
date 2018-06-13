@@ -30,17 +30,18 @@ protected:
 	Mesh	m_quadPyramid;
 	glm::mat4	m_quadTransform;
 
-	aie::OBJMesh m_bunnyMesh;
-	glm::mat4	m_bunnyTransform;
+	aie::OBJMesh* obj;
+	glm::mat4*	m_objTransform;
 
-	aie::OBJMesh m_spearMesh;
-	glm::mat4 m_spearTransform;
+	//aie::OBJMesh m_spearMesh;
+	//glm::mat4 m_spearTransform;
 
 	struct Light
 	{
 		glm::vec3 direction;
 		glm::vec3 diffuse;
 		glm::vec3 specular;
+		float power;
 	};
 
 	Light m_light;
